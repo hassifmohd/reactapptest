@@ -5,10 +5,15 @@ export const ThemeContext = React.createContext('light');
 class Withcontext extends Component {
     render() {
         return (
-            //If you remove ThemeContext.Provider, system will take light as default value
-            <ThemeContext.Provider value="dark">
+            <div>
+                {/* if you define provider, you must insert value. else theme will be blank */}
+                <ThemeContext.Provider value="dark">
+                    <Toolbar />
+                </ThemeContext.Provider>
+
+                {/* to use default value is not define the provider */}
                 <Toolbar />
-            </ThemeContext.Provider>
+            </div>
         );
     }
 }
@@ -23,9 +28,13 @@ function Toolbar(props) {
 
 function ThemedButton(props) {
     return (
-        <ThemeContext.Consumer>
-            {theme => <button {...props} theme={theme}>theme={theme}</button>}
-        </ThemeContext.Consumer>
+        <div>
+            <div>
+                <ThemeContext.Consumer>
+                    {theme => <button {...props} theme={theme}>theme={theme}</button>}
+                </ThemeContext.Consumer>
+            </div>
+        </div>
     );
 }
 

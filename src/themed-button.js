@@ -4,15 +4,14 @@ import React from 'react';
 function ThemedButton(props) {
     return (
         <ThemeContext.Consumer>
-            {theme => (
+            {magictheme => (
                 <button
                     {...props}
                     style={{
-                        backgroundColor: theme.background,
-                        color: theme.foreground
+                        backgroundColor: magictheme.background,
+                        color: magictheme.foreground
                     }}
-                >BUTTON</button>
-
+                >{props.buttonname ? props.buttonname : 'BUTTON'}</button>
             )}
         </ThemeContext.Consumer>
     );

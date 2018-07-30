@@ -1,26 +1,24 @@
-import {ThemeContext, themes} from './theme-context';
+import {ThemeContext, themefromoutside, students, subjects} from './theme-context';
 import ThemedButton from './themed-button';
 import React from 'react';
 
 function Toolbar(props) {
     return (
-        <ThemedButton onClick={props.changeTheme} />
+        <ThemedButton buttonname="CLICK ME" onClick={props.changeThemosupremo} />
     );
 }
 
-class Themecontext extends React.Component {
+class Themecontextual extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            theme: themes.light,
+            thermos: themefromoutside.light,
         };
 
         this.toggleTheme = () => {
             this.setState(state => ({
-                theme:
-                    state.theme === themes.dark
-                        ? themes.light
-                        : themes.dark,
+                thermos:
+                    state.thermos === themefromoutside.dark ? themefromoutside.light : themefromoutside.dark,
             }));
         };
     }
@@ -31,18 +29,32 @@ class Themecontext extends React.Component {
         // the default dark theme
         return (
             <div>
-                <ThemeContext.Provider value={this.state.theme}>
-                    <Toolbar changeTheme={this.toggleTheme} />
-                </ThemeContext.Provider>
-                <ThemeContext.Provider value={this.state.theme}>
-                    <Toolbar changeTheme={this.toggleTheme} />
-                </ThemeContext.Provider>
                 <div>
-                    <ThemedButton />
+                    <ThemeContext.Provider value={this.state.thermos}>
+                        <Toolbar changeThemosupremo={this.toggleTheme} />
+                        <Toolbar changeThemosupremo={this.toggleTheme} />
+                    </ThemeContext.Provider>
+                </div>
+                <div>
+                    <ThemeContext.Provider value={this.state.thermos}>
+                        <Toolbar changeThemosupremo={this.toggleTheme} />
+                    </ThemeContext.Provider>
+                </div>
+                <div>
+                    <Toolbar changeThemosupremo={this.toggleTheme} />
+                </div>
+                <div>
+                    <ThemedButton buttonname="ANOTHER BUTTON 1" />
+                </div>
+                <div>
+                    <ThemeContext.Provider value={this.state.thermos}>
+                        {/* can also be done without using Toolbar */}
+                        <ThemedButton buttonname="ANOTHER BUTTON 2" onClick={this.toggleTheme} />
+                    </ThemeContext.Provider>
                 </div>
             </div>
         );
     }
 }
 
-export default Themecontext;
+export default Themecontextual;
