@@ -84,7 +84,26 @@ import Themecontextualv2 from './Themecontextualv2';
 
 //Refs and Functional Components
 //https://reactjs.org/docs/refs-and-the-dom.html#refs-and-functional-components
-import Reffunction from './Refdom/Reffunction';
-ReactDOM.render(<Reffunction />, document.getElementById('refdom-reffunction'));
+// import Reffunction from './Refdom/Reffunction';
+// ReactDOM.render(<Reffunction />, document.getElementById('refdom-reffunction'));
+
+//Callback Refs
+//https://reactjs.org/docs/refs-and-the-dom.html#callback-refs
+// import Callbackrefs from './Refdom/Callbackrefs';
+// ReactDOM.render(<Callbackrefs />, document.getElementById('refdom-callbackrefs'));
+
+//Callback Refs : Cross component
+// import Refcross from './Refdom/Refcross';
+// ReactDOM.render(<Refcross />, document.getElementById('refdom-refcross'));
+
+//Forwarding refs to DOM components
+//https://reactjs.org/docs/forwarding-refs.html#forwarding-refs-to-dom-components
+// const FancyButton = React.forwardRef((props, ref) => (
+//     <button ref={ref} className="FancyButton">
+//         {props.children}
+//     </button>
+// ));
+// const ref = React.createRef();
+// ReactDOM.render(<FancyButton ref={ref}><p>props.children will bring all value in inside the FancyButton</p></FancyButton>, document.getElementById('refdom-fancybutton'));
 
 registerServiceWorker();
