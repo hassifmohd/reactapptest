@@ -84,7 +84,12 @@ import Themecontextualv2 from './Themecontextualv2';
 
 //Refs and Functional Components
 //https://reactjs.org/docs/refs-and-the-dom.html#refs-and-functional-components
-import Reffunction from './Refdom/Reffunction';
-ReactDOM.render(<Reffunction />, document.getElementById('refdom-reffunction'));
+// import Reffunction from './Refdom/Reffunction';
+// ReactDOM.render(<Reffunction />, document.getElementById('refdom-reffunction'));
+
+//UDEMY TUTORIAL
+import SearchBar from './UdemySection1/search_bar';
+ReactDOM.render(<SearchBar />, document.getElementById('udemysection1-searchbar'));
+
 
 registerServiceWorker();
