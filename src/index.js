@@ -106,4 +106,8 @@ import Themecontextualv2 from './Themecontextualv2';
 // const ref = React.createRef();
 // ReactDOM.render(<FancyButton ref={ref}><p>props.children will bring all value in inside the FancyButton</p></FancyButton>, document.getElementById('refdom-fancybutton'));
 
+//UDEMY TUTORIAL
+import SearchBar from './UdemySection1/search_bar';
+ReactDOM.render(<SearchBar />, document.getElementById('udemysection1-searchbar'));
+
 registerServiceWorker();
