@@ -107,7 +107,35 @@ import Themecontextualv2 from './Themecontextualv2';
 // ReactDOM.render(<FancyButton ref={ref}><p>props.children will bring all value in inside the FancyButton</p></FancyButton>, document.getElementById('refdom-fancybutton'));
 
 //UDEMY TUTORIAL
-import SearchBar from './UdemySection1/search_bar';
-ReactDOM.render(<SearchBar />, document.getElementById('udemysection1-searchbar'));
+// import SearchBar from './UdemySection1/search_bar';
+// ReactDOM.render(<SearchBar />, document.getElementById('udemysection1-searchbar'));
+
+//UDEMY TUTORIAL: react with reducers
+// import BookList from './Redux/Containers/book-list';
+// import { Provider } from 'react-redux';
+// import store from './Redux/Reducers/index';
+// ReactDOM.render(<Provider store={store}><BookList books={[{title: 'Book 1', id: 1}]}/></Provider>, document.getElementById('redux-booklist'));
+
+//RECAP REDUX
+import BookList from './Reduxrecap1/Booklist';
+import BookDetail from './Reduxrecap1/Bookdetail';
+
+import { Provider } from 'react-redux';
+import mysqldata from './Reduxrecap1/mysql';
+
+let bookdetailyes = {title: 'Redux for dummies', id: 1, page: 10};
+
+ReactDOM.render((
+    <div>
+        <p>BOOKLIST</p>
+        <Provider store={mysqldata}>
+            <div>
+                <BookList />
+                <BookDetail sendsomehelp='We here to help' whatyougiveyougetback='my world'/>
+            </div>
+        </Provider>
+    </div>
+), document.getElementById('redux-booklist2'));
+
 
 registerServiceWorker();
