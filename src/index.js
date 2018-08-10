@@ -11,7 +11,10 @@ import Themecontextualv2 from './Themecontextualv2';
 
 //How to load bootstrap from reactjs https://stackoverflow.com/questions/40037657/how-to-include-bootstrap-css-and-js-in-reactjs-app
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'chartist/dist/chartist.min.css';
+import 'chartist/dist/chartist.min.js';
+
 
 
 // ReactDOM.render(<App />, document.getElementById('root1'));
@@ -141,8 +144,24 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // ), document.getElementById('redux-booklist2'));
 
 //WEATHER API
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import reducersStoreMiddleware from './Weatherapi/CombineReducers';
+
 import SearchBar from './Weatherapi/SearchBar';
-ReactDOM.render(<SearchBar />, document.getElementById('weatherapi'));
+import WeatherList from './Weatherapi/WeatherList';
+
+
+// const asdasda = applyMiddleware()(createStore);
+
+ReactDOM.render((
+    <Provider store={reducersStoreMiddleware}>
+        <div>
+            <SearchBar />
+            <WeatherList />
+        </div>
+    </Provider>
+), document.getElementById('weatherapi'));
 
 
 registerServiceWorker();

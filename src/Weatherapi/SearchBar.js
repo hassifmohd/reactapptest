@@ -1,6 +1,11 @@
 import React from 'react';
+// import _ from 'lodash';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchWeather } from './ActionGetWeatherForecast';
 
-export default class SearchBar extends React.Component {
+
+class SearchBar extends React.Component {
     constructor(props){
         super(props);
 
@@ -16,6 +21,7 @@ export default class SearchBar extends React.Component {
 
         console.log('handlerInputOnChange=' + event.target.value);
 
+        // this will cause state to update eveytime, thus refreshing the component everytime
         this.setState({
             searchbar_searchterm: event.target.value
         });
@@ -26,17 +32,24 @@ export default class SearchBar extends React.Component {
         console.log('handlerFormOnSubmit=' + this.state.searchbar_searchterm);
 
         event.preventDefault();
+
+        //get the weather
+        this.props.fetchWeather(this.state.searchbar_searchterm);
     }
 
     render() {
+
+        // after changes more then .5 seconds, then will execute
+        // const callHandlerInputOnChange = _.debounce(this.handlerInputOnChange, 500);
+
         return (
             <form className="form-inline" onSubmit={this.handlerFormOnSubmit}>
                 <input 
                     className="form-control"
                     type="text"
                     placeholder="enter a city"
-                    value={this.state.searchbar_searchterm}
                     onChange={this.handlerInputOnChange}
+                    value={this.state.searchbar_searchterm}
                 />
                 <button 
                     type="submit"
@@ -47,3 +60,8 @@ export default class SearchBar extends React.Component {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({fetchWeather}, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(SearchBar);
