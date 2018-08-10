@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+// import App from './App';
 import Testing from './Testing';
-import AppRouterLoadable from './AppRouterLoadable';
+// import AppRouterLoadable from './AppRouterLoadable';
 import registerServiceWorker from './registerServiceWorker';
 import Nocontext from './Nocontext';
 import {ThemeContext, themes} from './theme-context';
 import ThemedButton from './themed-button';
 import Themecontextualv2 from './Themecontextualv2';
+
+//How to load bootstrap from reactjs https://stackoverflow.com/questions/40037657/how-to-include-bootstrap-css-and-js-in-reactjs-app
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 // ReactDOM.render(<App />, document.getElementById('root1'));
@@ -117,25 +120,29 @@ import Themecontextualv2 from './Themecontextualv2';
 // ReactDOM.render(<Provider store={store}><BookList books={[{title: 'Book 1', id: 1}]}/></Provider>, document.getElementById('redux-booklist'));
 
 //RECAP REDUX
-import BookList from './Reduxrecap1/Booklist';
-import BookDetail from './Reduxrecap1/Bookdetail';
+// import BookList from './Reduxrecap1/Booklist';
+// import BookDetail from './Reduxrecap1/Bookdetail';
 
-import { Provider } from 'react-redux';
-import mysqldata from './Reduxrecap1/mysql';
+// import { Provider } from 'react-redux';
+// import mysqldata from './Reduxrecap1/mysql';
 
-let bookdetailyes = {title: 'Redux for dummies', id: 1, page: 10};
+// let bookdetailyes = {title: 'Redux for dummies', id: 1, page: 10};
 
-ReactDOM.render((
-    <div>
-        <p>BOOKLIST</p>
-        <Provider store={mysqldata}>
-            <div>
-                <BookList />
-                <BookDetail sendsomehelp='We here to help' whatyougiveyougetback='my world'/>
-            </div>
-        </Provider>
-    </div>
-), document.getElementById('redux-booklist2'));
+// ReactDOM.render((
+//     <div>
+//         <p>BOOKLIST</p>
+//         <Provider store={mysqldata}>
+//             <div>
+//                 <BookList />
+//                 <BookDetail sendsomehelp='We here to help' whatyougiveyougetback='my world'/>
+//             </div>
+//         </Provider>
+//     </div>
+// ), document.getElementById('redux-booklist2'));
+
+//WEATHER API
+import SearchBar from './Weatherapi/SearchBar';
+ReactDOM.render(<SearchBar />, document.getElementById('weatherapi'));
 
 
 registerServiceWorker();
