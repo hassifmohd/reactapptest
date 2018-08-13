@@ -5,7 +5,7 @@ import Testing from './Testing';
 // import AppRouterLoadable from './AppRouterLoadable';
 import registerServiceWorker from './registerServiceWorker';
 import Nocontext from './Nocontext';
-import {ThemeContext, themes} from './theme-context';
+import { ThemeContext, themes } from './theme-context';
 import ThemedButton from './themed-button';
 import Themecontextualv2 from './Themecontextualv2';
 
@@ -13,7 +13,7 @@ import Themecontextualv2 from './Themecontextualv2';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'chartist/dist/chartist.min.css';
-import 'chartist/dist/chartist.min.js';
+import 'chartist/dist/chartist.min';
 
 
 
@@ -144,24 +144,32 @@ import 'chartist/dist/chartist.min.js';
 // ), document.getElementById('redux-booklist2'));
 
 //WEATHER API
+// import { Provider } from 'react-redux';
+// import reducersStoreMiddleware from './Weatherapi/CombineReducers';
+
+// import SearchBar from './Weatherapi/SearchBar';
+// import WeatherList from './Weatherapi/WeatherList';
+
+// ReactDOM.render((
+//     <Provider store={reducersStoreMiddleware}>
+//         <div>
+//             <SearchBar />
+//             <WeatherList />
+//         </div>
+//     </Provider>
+// ), document.getElementById('weatherapi'));
+
+//REACT ROUTER
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
-import reducersStoreMiddleware from './Weatherapi/CombineReducers';
-
-import SearchBar from './Weatherapi/SearchBar';
-import WeatherList from './Weatherapi/WeatherList';
-
-
-// const asdasda = applyMiddleware()(createStore);
+import reducersStoreMiddleware from './Reactrouter/CombineReducers';
+import Routes from './Reactrouter/Routes';
 
 ReactDOM.render((
     <Provider store={reducersStoreMiddleware}>
-        <div>
-            <SearchBar />
-            <WeatherList />
-        </div>
+        <Routes />
     </Provider>
-), document.getElementById('weatherapi'));
+), document.getElementById('react-router'));
+
 
 
 registerServiceWorker();

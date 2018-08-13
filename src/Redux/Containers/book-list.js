@@ -25,6 +25,8 @@ class BookList extends React.Component {
     
     render() {
 
+        // alert('qwe');
+
         return ( <ul>
             <li>AAA</li>
             <li>BBB</li>

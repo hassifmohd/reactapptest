@@ -1,0 +1,20 @@
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
+import { reducer as formReducer } from 'redux-form';
+
+import ReducerPost from './ReducerPost';
+
+const reducers = combineReducers({
+
+    // if we create store with a blank reducer, it will trigger error
+    // so create blank reducer
+    blankstate: (blankdata = {}) => blankdata,
+    
+    posts: ReducerPost,
+    form: formReducer
+});
+
+//we do all in one, combine reducers + create store + apply middleware = reducersStoreMiddleware
+const reducersStoreMiddleware = applyMiddleware(ReduxPromise)(createStore)(reducers);
+
+export default reducersStoreMiddleware;
