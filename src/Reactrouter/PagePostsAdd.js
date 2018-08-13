@@ -1,14 +1,96 @@
 import React from 'react';
-import { reduxForm } from 'redux-form';
-// import { connect } from 'react-redux';
-// import { fetchPosts } from './ActionFetchPosts';
-// import { bindActionCreators } from 'redux';
+import { Field, reduxForm } from 'redux-form';
+import { createPost } from './ActionFetchPosts';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+// import { fetchPosts } from './ActionFetchPosts'; //
+import { bindActionCreators } from 'redux';
+
+//Do redux form as per tutorial here https://redux-form.com/7.4.2/docs/gettingstarted.md/
+let PostForm = props => {
+
+    const { handleSubmit, pristine, reset, submitting } = props;
+
+    return (
+        <form onSubmit={handleSubmit}>
+
+            <Field name="title"         label="Title"       component="input"       type="text"     component={renderField} />
+            <Field name="categories"    label="Categories"  component="input"       type="text"     component={renderField} />
+            <Field name="content"       label="Content"     component="textarea"    type="text"     component={renderField} />
+
+            <button type="submit">Submit</button>
+            <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+        </form>
+    );
+}
+
+//declare error validation here
+const validate = values => {
+    const errors = {}
+
+    if (!values.title) {
+        errors.title = 'Please enter the title'
+    }
+
+    if (!values.categories) {
+        errors.categories = 'Please enter the categories'
+    }
+
+    if (!values.content) {
+        errors.content = 'Please enter the content'
+    }
+
+    return errors
+}
+
+//declare warn validation here
+const warn = values => {
+    const warnings = {}
+
+    if (values.content && values.content.length < 10) {
+        warnings.content = 'Content seems to be too short'
+    }
+
+    return warnings
+}
+
+
+//overwrite default display so that, if got error or warn, it can be display
+const renderField = ({name, input, label, type, meta: { touched, error, warning } }) => 
+    (
+        <div className="form-group">
+            <label htmlFor={name}>{label}</label>
+            <input {...input} placeholder={label} type={type} className="form-control" />
+            <div>{touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}</div>
+        </div>
+    )
+
+PostForm = reduxForm({
+    form: 'PostForm',
+    fields: ['title', 'content', 'categories'],
+    validate,
+    warn,
+    initialValues: { content: 'You can assign default values here. Wee...' },
+}, null, { createPost })(PostForm);
 
 class PostAdd extends React.Component {
+
+    static contextTypes = {
+        router: PropTypes.object
+    }
 
     constructor(props) {
         super(props);
 
+    }
+
+    submit = values => {
+        // print the form values to the console
+        console.log(values);
+        //this.props.createPost(values);
+
+        alert("MOVE");
+        this.context.router.push("/");
     }
 
     render() {
@@ -19,7 +101,7 @@ class PostAdd extends React.Component {
         const categories = this.props.fields.categories;
         const content = this.props.fields.content;
         */
-        const { fields: { title, categories, content }, handleSubmit } = this.props;
+        const { handleSubmit } = this.props;
 
         console.log("Execute PostAdd.render()");
 
@@ -27,30 +109,18 @@ class PostAdd extends React.Component {
             <div>
                 <h2>Add new post</h2>
 
-                <form onSubmit={handleSubmit} >
-                    <div className='form-group'>
-                        <label>Title</label>
-                        <input type='text' className='form-control' {...title} />
-                    </div>
-
-                    <div className='form-group'>
-                        <label>Categories</label>
-                        <input type='text' className='form-control' {...categories} />
-                    </div>
-
-                    <div className='form-group'>
-                        <label>Content</label>
-                        <textarea className='form-control' {...content} />
-                    </div>
-
-                    <button type='submit' className='btn btn-primary'>SAVE</button>
-                </form>
+                <PostForm onSubmit={this.submit} />
             </div>
         );
     }
 }
 
-export default reduxForm({
-    form: 'PostsNewForm',
-    fields: ['title', 'categories', 'content'],
-})(PostAdd);
+// export default reduxForm({ form: 'PostsNewForm' }, null, { createPost })(PostAdd);
+// export default PostAdd;
+// export default connect(null, {createPost})(reduxForm(formData)(PostForm));
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ createPost }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(PostAdd);

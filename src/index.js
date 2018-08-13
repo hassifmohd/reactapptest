@@ -163,13 +163,80 @@ import 'chartist/dist/chartist.min';
 import { Provider } from 'react-redux';
 import reducersStoreMiddleware from './Reactrouter/CombineReducers';
 import Routes from './Reactrouter/Routes';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+let global = {
+    animal: 'ayam',
+    color: 'red',
+    Router: Router,
+};
+
+const Pompom = React.createContext(global);
+
+const Home = () => (
+    <div>
+        <h2>Welcome</h2>
+    </div>
+);
+
+class Popla extends React.Component {
+
+    static contextTypes = {
+        global: PropTypes.object
+    };
+
+    hupla() {
+        console.log('HUPLA CLICKED');
+        
+    }
+
+    render() {
+        return (
+            <Pompom.Consumer>
+            { theme => (
+                <div>
+                    <div>zxczxczcz {theme.animal}</div>
+                    <Router>
+                        <div>
+                            <h1>Blog post</h1>
+                            <ul>
+                                <li><Link to="/">Home</Link></li>
+                                <li><Link to="/index">Post Index</Link></li>
+                                <li><Link to="/add">Post add</Link></li>
+                            </ul>
+                            <hr />
+                            <Route exact path="/">
+                                <div onClick={this.hupla} >AYAM</div>
+                            </Route>
+                            <Route exact path="/index" component={Home} />
+                            <Route exact path="/add" component={Home} />
+                        </div>
+                    </Router>
+                </div>
+            )}
+            </Pompom.Consumer>
+        );
+    }
+}
 
 ReactDOM.render((
-    <Provider store={reducersStoreMiddleware}>
-        <Routes />
-    </Provider>
+    
+
+    <div>
+        <div>HEADER</div>
+            <Pompom.Provider value={global}>
+                <Popla />
+            </Pompom.Provider>
+        <div>FOOTER</div>
+    </div>
+
+    
 ), document.getElementById('react-router'));
 
 
+        {/* <Provider store={reducersStoreMiddleware}>
+            <Routes />
+        </Provider> */}
 
 registerServiceWorker();
