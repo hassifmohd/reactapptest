@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { createPost } from './ActionFetchPosts';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 // import { fetchPosts } from './ActionFetchPosts'; //
 import { bindActionCreators } from 'redux';
 
@@ -82,15 +83,21 @@ class PostAdd extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            doneUpdate: false
+        };
     }
 
     submit = values => {
         // print the form values to the console
         console.log(values);
-        //this.props.createPost(values);
-
-        alert("MOVE");
-        this.context.router.push("/");
+        this.props.createPost(values)
+            .then(() => {
+                alert("SAVE SUCCESS");
+                this.setState({
+                    doneUpdate: true
+                });
+            });
     }
 
     render() {
@@ -104,6 +111,11 @@ class PostAdd extends React.Component {
         const { handleSubmit } = this.props;
 
         console.log("Execute PostAdd.render()");
+
+        // ortodox wa to do redirect. better approach is using withRouter(history.push())
+        if( this.state.doneUpdate) {
+            return <Redirect to="/" />;
+        }
 
         return (
             <div>

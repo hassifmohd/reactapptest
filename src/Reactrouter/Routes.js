@@ -10,12 +10,24 @@ const PostsAddLoadable = Loadable({
     loader: () => import('./PagePostsAdd'),
     loading: () => <div>Loading...</div>,
 });
+const PostsViewLoadable = Loadable({
+    loader: () => import('./PagePostsView'),
+    loading: () => <div>Loading...</div>,
+});
 
 const Home = () => (
     <div>
         <h2>Welcome</h2>
     </div>
 );
+
+const Child = function(_ref) {
+    var match = _ref.match;
+
+    return <div>
+        <h3>ID: {match.params.post_id}</h3>
+    </div>
+};
 
 export default function () {
     return (
@@ -31,6 +43,7 @@ export default function () {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/index" component={PostsIndexLoadable} />
                 <Route exact path="/add" component={PostsAddLoadable} />
+                <Route path="/view/:post_id" component={PostsViewLoadable} />
             </div>
         </Router>
     );

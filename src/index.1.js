@@ -163,11 +163,106 @@ import 'chartist/dist/chartist.min';
 import { Provider } from 'react-redux';
 import reducersStoreMiddleware from './Reactrouter/CombineReducers';
 import Routes from './Reactrouter/Routes';
+import { BrowserRouter as Router, Redirect, Route, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+let global = {
+    animal: 'ayam',
+    color: 'red',
+    Router: Router,
+};
+
+const Pompom = React.createContext(global);
+
+const Home1 = () => (
+    <div>
+        <h2>Welcome1</h2>
+    </div>
+);
+const Home2 = () => (
+    <div>
+        <h2>Welcome2</h2>
+    </div>
+);
+const Home3 = () => (
+    <div>
+        <h2>Welcome3</h2>
+    </div>
+);
+
+class Popla extends React.Component {
+
+    static contextTypes = {
+        global: PropTypes.object
+    };
+
+    state = {
+        redirect: false
+    }
+
+    constructor(props) {
+        super(props);
+
+        this.hupla = this.hupla.bind(this);
+    }
+
+    componentWillMount() {
+        console.log('componentWillMount executed');
+    }
+
+    gotospace() {
+        alert("ASD");
+        return <Redirect to='/add' />;
+    }
+
+    hupla() {
+        console.log('HUPLA CLICKED : ' + global.animal);
+    }
+
+    render() {
+        return (
+            <Pompom.Consumer>
+            { theme => (
+                <div>
+                    <div>zxczxczcz {theme.animal}</div>
+                    <Router>
+                        <div>
+                            <h1 onClick={this.gotospace} >Blog post</h1>
+                            <ul>
+                                <li><Link to="/">Home</Link></li>
+                                <li><Link to="/index">Post Index</Link></li>
+                                <li><Link to="/index/add">Post add</Link></li>
+                            </ul>
+                            <hr />
+                            <Route path="/" component={Home1} />
+                            <Route path="/index" component={Home2} />
+                            <Route path="/index/add" component={Home3} />
+                        </div>
+                    </Router>
+                </div>
+            )}
+            </Pompom.Consumer>
+        );
+    }
+}
 
 ReactDOM.render((
-    <Provider store={reducersStoreMiddleware}>
-        <Routes />
-    </Provider>
+    
+
+    <div>
+        <div>HEADER</div>
+            <Pompom.Provider value={global}>
+                <Popla />
+            </Pompom.Provider>
+        <div>FOOTER</div>
+    </div>
+
+    
 ), document.getElementById('react-router'));
+
+
+        {/* <Provider store={reducersStoreMiddleware}>
+            <Routes />
+        </Provider> */}
 
 registerServiceWorker();

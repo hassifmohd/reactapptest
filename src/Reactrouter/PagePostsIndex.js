@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from './ActionFetchPosts';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
 class PostIndex extends React.Component {
@@ -11,7 +12,26 @@ class PostIndex extends React.Component {
     }
 
     componentWillMount() {
-        this.props.posts();
+        this.props.fetchPosts();
+    }
+
+    renderPosts() {
+        console.log('renderPosts', this.props);
+
+        if(!this.props.posts) {
+            return <li>ONGOING</li>
+        }
+
+        return this.props.posts.map((post) => {
+            return (
+                <li className='list-group-item' key={post.id}>
+                    <Link to={"view/" + post.id} >
+                        <span className='pull-xs-right'>{post.categories}</span>
+                        <strong>{post.title}</strong>
+                    </Link>
+                </li>
+            )
+        });
     }
 
     render() {
@@ -21,13 +41,26 @@ class PostIndex extends React.Component {
         return (
             <div>
                 <h2>Posts index</h2>
+                <ul className='list-group'>
+                    {this.renderPosts()}
+                </ul>
             </div>
         );
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ posts: fetchPosts }, dispatch);
+function mapStateToProps(state) {
+
+    console.log('mapStateToProps', state.posts);
+
+    return {
+        posts: state.posts.posts
+    }
 }
 
-export default connect(null, mapDispatchToProps)(PostIndex);
+// why need this if you can ust simply bind it directly
+// function mapDispatchToProps(dispatch) {
+//     return bindActionCreators({ posts: fetchPosts }, dispatch);
+// }
+
+export default connect(mapStateToProps, { fetchPosts: fetchPosts })(PostIndex);
