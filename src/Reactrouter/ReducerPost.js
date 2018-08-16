@@ -10,6 +10,10 @@ export default function(state = [], action) {
         case Config.FETCT_POSTS:
         return { ...state, posts: action.payload.data};
         break;
+
+        case Config.FETCH_POST:
+        return { ...state, post: action.payload.data};
+        break;
     }
 
     return state;

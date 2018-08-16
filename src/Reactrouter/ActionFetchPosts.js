@@ -24,3 +24,17 @@ export function createPost(props) {
         payload: request
     }
 }
+
+export function fetchPost(id) {
+
+    console.log("Execute fetchPost().axios.post()");
+    const theUrl = `http://reduxblog.herokuapp.com/api/posts/${id}&key=${Config.API_KEY}`;
+    // http://reduxblog.herokuapp.com/api/posts/270259?key=123
+    // console.log(theUrl);
+    const request = axios.get(theUrl);
+
+    return {
+        type: Config.FETCH_POST,
+        payload: request
+    }
+}

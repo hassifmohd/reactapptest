@@ -4,15 +4,15 @@ import Loadable from 'react-loadable'
 
 const PostsIndexLoadable = Loadable({
     loader: () => import('./PagePostsIndex'),
-    loading: () => <div>Loading...</div>,
+    loading: () => <div>Loading from Loadable...</div>,
 });
 const PostsAddLoadable = Loadable({
     loader: () => import('./PagePostsAdd'),
-    loading: () => <div>Loading...</div>,
+    loading: () => <div>Loading from Loadable...</div>,
 });
 const PostsViewLoadable = Loadable({
     loader: () => import('./PagePostsView'),
-    loading: () => <div>Loading...</div>,
+    loading: () => <div>Loading from Loadable...</div>,
 });
 
 const Home = () => (
