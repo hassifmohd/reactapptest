@@ -160,14 +160,43 @@ import 'chartist/dist/chartist.min';
 // ), document.getElementById('weatherapi'));
 
 //REACT ROUTER
+// import { Provider } from 'react-redux';
+// import reducersStoreMiddleware from './Reactrouter/CombineReducers';
+// import Routes from './Reactrouter/Routes';
+
+// ReactDOM.render((
+//     <Provider store={reducersStoreMiddleware}>
+//         <Routes />
+//     </Provider>
+// ), document.getElementById('react-router'));
+
 import { Provider } from 'react-redux';
-import reducersStoreMiddleware from './Reactrouter/CombineReducers';
-import Routes from './Reactrouter/Routes';
+import reducersStoreMiddleware from './Blog2/CombineReducers';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+
+class Hello extends React.Component {
+    render() {
+        return <div>HELLO</div>
+    }
+}
+
+class Goodbye extends React.Component {
+    render() {
+        return <div>Goodbye</div>
+    }
+}
 
 ReactDOM.render((
     <Provider store={reducersStoreMiddleware}>
-        <Routes />
+        <BrowserRouter>
+            <div>
+                <h1>START</h1>
+                <Route path="/hello" component={Hello} />
+                <Route path="/goodbye" component={Goodbye} />
+                <h1>END</h1>
+            </div>
+        </BrowserRouter>
     </Provider>
-), document.getElementById('react-router'));
+), document.getElementById('react-blog2'));
 
 registerServiceWorker();
