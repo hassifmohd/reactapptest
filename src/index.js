@@ -174,26 +174,17 @@ import { Provider } from 'react-redux';
 import reducersStoreMiddleware from './Blog2/CombineReducers';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
-class Hello extends React.Component {
-    render() {
-        return <div>HELLO</div>
-    }
-}
-
-class Goodbye extends React.Component {
-    render() {
-        return <div>Goodbye</div>
-    }
-}
+import PostsIndex from './Blog2/PostsIndex';
+import PostUpdate from './Blog2/PostUpdate';
 
 ReactDOM.render((
     <Provider store={reducersStoreMiddleware}>
         <BrowserRouter>
             <div>
-                <h1>START</h1>
-                <Route path="/hello" component={Hello} />
-                <Route path="/goodbye" component={Goodbye} />
-                <h1>END</h1>
+                <h2>START</h2>
+                <Route path="/" component={PostsIndex} />
+                <Route path="/posts/add" component={PostUpdate} />
+                <h2>END</h2>
             </div>
         </BrowserRouter>
     </Provider>
